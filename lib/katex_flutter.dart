@@ -24,7 +24,7 @@ class KaTeX extends StatefulWidget {
   // Text color
   final Color color;
 
-  // Whether to use the parent's width or the one required by the equation
+  // Whether to use the parent's width or only the minimum required by the equation
   final bool inheritWidth;
 
   KaTeX(
@@ -57,7 +57,7 @@ class _KaTeXState extends State<KaTeX> {
         name: 'RenderedWebViewHeight',
         onMessageReceived: (JavascriptMessage message) {
           // Setting the widget's height to the height posted by JavaScript
-          double viewHeight = double.parse(message.message) *1.2;
+          double viewHeight = double.parse(message.message) * 1.2;
           setState(() {
             _height = viewHeight;
           });
@@ -67,7 +67,7 @@ class _KaTeXState extends State<KaTeX> {
           name: 'RenderedWebViewWidth',
           onMessageReceived: (JavascriptMessage message) {
             // Setting the widget's width to the height posted by JavaScript
-            double viewWidth = double.parse(message.message) *1.2;
+            double viewWidth = double.parse(message.message) * 1.2;
             setState(() {
               _width = viewWidth;
             });
@@ -77,7 +77,7 @@ class _KaTeXState extends State<KaTeX> {
       javascriptMode: JavascriptMode.unrestricted,
       javascriptChannels: jsChannels,
       onWebViewCreated: (WebViewController webViewController) {
-        _controller=webViewController;
+        _controller = webViewController;
         renderLaTeX();
       },
     );
