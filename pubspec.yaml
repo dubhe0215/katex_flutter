@@ -1,5 +1,5 @@
 name: katex_flutter
-description: Render scientific equotions using the KaTeX library
+description: Performantly render scientific equations using the KaTeX library.
 version: 1.0.0+2
 homepage: https://gitlab.com/testapp-system-katex_flutter
 
