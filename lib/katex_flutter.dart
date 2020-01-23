@@ -24,13 +24,17 @@ class KaTeX extends StatefulWidget {
   // Text color
   final Color color;
 
+  // Whether to use the parent's width or the one required by the equation
+  final bool inheritWidth;
+
   KaTeX(
       {Key key,
       @required this.laTeX,
       this.delimiter = '\$',
       this.displayDelimiter = '\$\$',
       this.color = Colors.black,
-      this.background = Colors.white});
+      this.background = Colors.white,
+      this.inheritWidth = true});
 
   @override
   _KaTeXState createState() => _KaTeXState();
@@ -41,46 +45,40 @@ class _KaTeXState extends State<KaTeX> {
   String _htmlString;
 
   // The controller is required to load content from a String
-
-  final Completer<WebViewController> _controllerCompleter =
-      Completer<WebViewController>();
   WebViewController _controller;
 
-  double _height;
+  double _height = 50;
   double _width;
 
   @override
   void initState() {
-    // Waiting for creation of webview
-    _controllerCompleter.future.then((webViewController) {
-      _controller=webViewController;
-      renderLaTeX();
-    });
+    Set<JavascriptChannel> jsChannels = Set();
+    jsChannels.add(JavascriptChannel(
+        name: 'RenderedWebViewHeight',
+        onMessageReceived: (JavascriptMessage message) {
+          // Setting the widget's height to the height posted by JavaScript
+          double viewHeight = double.parse(message.message) *1.2;
+          setState(() {
+            _height = viewHeight;
+          });
+        }));
+    if (!widget.inheritWidth)
+      jsChannels.add(JavascriptChannel(
+          name: 'RenderedWebViewWidth',
+          onMessageReceived: (JavascriptMessage message) {
+            // Setting the widget's width to the height posted by JavaScript
+            double viewWidth = double.parse(message.message) *1.2;
+            setState(() {
+              _width = viewWidth;
+            });
+          }));
     _webView = WebView(
       debuggingEnabled: false,
       javascriptMode: JavascriptMode.unrestricted,
-      javascriptChannels: Set.from([
-        JavascriptChannel(
-            name: 'RenderedWebViewHeight',
-            onMessageReceived: (JavascriptMessage message) {
-              // Setting the widget's height to the height posted by JavaScript
-              double viewHeight = double.parse(message.message) + 4;
-              setState(() {
-                _height = viewHeight;
-              });
-            }),
-        JavascriptChannel(
-            name: 'RenderedWebViewWidth',
-            onMessageReceived: (JavascriptMessage message) {
-              // Setting the widget's width to the height posted by JavaScript
-              double viewWidth = double.parse(message.message) + 32;
-              setState(() {
-                _width = viewWidth;
-              });
-            })
-      ]),
+      javascriptChannels: jsChannels,
       onWebViewCreated: (WebViewController webViewController) {
-        if (!_controllerCompleter.isCompleted) _controllerCompleter.complete(webViewController);
+        _controller=webViewController;
+        renderLaTeX();
       },
     );
     super.initState();
@@ -88,10 +86,6 @@ class _KaTeXState extends State<KaTeX> {
 
   @override
   Widget build(BuildContext context) {
-    print(_height);
-    print(_width);
-    print('#${widget.color.value.toRadixString(16).substring(2)}');
-    print('#${widget.background.value.toRadixString(16).substring(2)}');
     return SizedBox(
       height: _height,
       width: _width,
@@ -106,7 +100,7 @@ class _KaTeXState extends State<KaTeX> {
   }
 
   void renderLaTeX({String laTeX}) {
-    if(laTeX==null) laTeX=widget.laTeX;
+    if (laTeX == null) laTeX = widget.laTeX;
     _htmlString = '''<!DOCTYPE html>
 <html>
 <head>
@@ -122,7 +116,7 @@ class _KaTeXState extends State<KaTeX> {
     var height = document.querySelector("#katex_flutter").clientHeight;
     var width = document.querySelector("#katex_flutter").clientWidth;
     RenderedWebViewHeight.postMessage(height);
-    RenderedWebViewWidth.postMessage(width);
+    if("RenderedWebViewWidth" in window) RenderedWebViewWidth.postMessage(width);
     });
 </script>
 <style>
@@ -145,8 +139,8 @@ body { overflow: auto; }
 </head>
 <body><div id="katex_flutter">${widget.laTeX}</div></body>
 </html>''';
-    var localUri = Uri.dataFromString(_htmlString,
-        mimeType: 'text/html', encoding: utf8);
+    var localUri =
+        Uri.dataFromString(_htmlString, mimeType: 'text/html', encoding: utf8);
     _controller.loadUrl(localUri.toString());
   }
 }
