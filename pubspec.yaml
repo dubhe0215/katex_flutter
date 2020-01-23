@@ -1,7 +1,6 @@
 name: katex_flutter
 description: Render scientific equotions using the KaTeX library
 version: 0.0.1
-author: Jasper Michalke <jasper.michalke@jasmich.de>
 homepage: https://gitlab.com/testapp-system-katex_flutter
 
 environment:
@@ -10,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: any
+  webview_flutter: '^0.3.19+5'
 
 dev_dependencies:
   flutter_test:
