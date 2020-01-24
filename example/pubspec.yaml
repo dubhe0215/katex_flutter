@@ -24,7 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   katex_flutter:
-    path: /home/jami/StudioProjects/katex_flutter
+    path: ../
     # git: https://gitlab.com/testapp-system/katex_flutter.git
 
 dev_dependencies:
