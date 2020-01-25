@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:katex_flutter/katex_flutter.dart';
 
@@ -89,11 +90,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   controller: _laTeXInputController,
                 ),
               ),
-              Container(
-                width: 600,
-                height: 600,
-                child: KaTeX(laTeX: _laTeX),
-              ),
+              (kIsWeb)
+                  ? Container(
+                      width: 600,
+                      height: 600,
+                      child: KaTeX(laTeX: _laTeX),
+                    )
+                  : Container(
+                      child: KaTeX(
+                        laTeX: _laTeX,
+                        background: Colors.grey[50],
+                      ),
+                    )
             ],
           ),
         ),

@@ -16,7 +16,7 @@ On mobile platofrom this package mainly depends on [webview_flutter](https://pub
 
 On web platform this package directly into Flutter's platfrom view's shadow root.
 
-**Unlike flutter_tex it does not create a local web server. This increases the performance significantly.**
+**Unlike flutter_tex it does not create a local web server. This increases the performance significantly and allows non-mobile platforms.**
 
 ## API
 
