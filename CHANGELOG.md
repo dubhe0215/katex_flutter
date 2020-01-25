@@ -1,4 +1,4 @@
-## [1.1.0+4] - Forst support for web platforms
+## [1.1.1+5] - First support for web platforms
 
 * Stable support for Android and iOS
 * Experimental support for web platform. Auto-sizing the Widget is not supportet yet on web.

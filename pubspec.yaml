@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   webview_flutter: '^0.3.19+5'
-  js: any
+  js: '^0.6.1+1'
 
 dev_dependencies:
   flutter_test:
