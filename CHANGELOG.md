@@ -1,3 +1,7 @@
+## 2.0.1+7 - Fixed rendering of several equations
+
+ * Fixed issues when using several different KaTeX-Widgets on web platform
+
 ## 2.0.0+6 - Support for web and mobile allongside
 
  * Seperated mobile and web code

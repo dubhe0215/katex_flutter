@@ -21,7 +21,7 @@ On web platform this package directly into Flutter's platfrom view's shadow root
 ## API
 
 ```dart
-Widget KaTeX(
+KaTeX(
   @required laTeX,             // The LaTeX code to be rendered
   delimiter = '\$',            // The delimiter to be used for inline LaTeX
   displayDelimiter = '\$\$',   // The delimiter to be used for Display (centered, "important") LaTeX
@@ -38,7 +38,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^1.0.1+3
+  katex_flutter: ^2.0.1+7
 ```
 
 ### 2. Install it
@@ -71,10 +71,17 @@ If you want to use different LaTeX delimiters than `$` for inline and `$$` for d
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
 <script>
-    function katex_flutter_render() {
+    function katex_flutter_render(id) {
         document.querySelectorAll("flt-platform-view").forEach(platformView => {
-            if (platformView.shadowRoot.children[1].classList.contains('katex_flutter_code')) {
-                renderMathInElement(platformView.shadowRoot.children[1], {
+            var texView = platformView.shadowRoot.children[1];
+            if (texView.classList.contains('katex_flutter_code') && texView.id == 'katex_flutter_' + id) {
+                if (texView.dataset['katex_flutter_latex_code'] != undefined) {
+                    texView.innerHTML = texView.dataset['katex_flutter_latex_code'];
+                } else {
+                    texView.dataset['katex_flutter_latex_code'] = texView.innerHTML;
+                }
+                texView.classList.add('katex_fluter_rendered')
+                renderMathInElement(texView, {
                     delimiters: [{
                         left: "$",
                         right: "$",
