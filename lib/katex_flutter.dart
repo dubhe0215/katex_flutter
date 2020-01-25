@@ -1,7 +1,5 @@
 library katex_flutter;
 
-import 'dart:async';
-import 'dart:convert';
 import 'katex_flutter_stub.dart'
     // ignore: uri_does_not_exist
     if (dart.library.io) 'katex_flutter_mobile.dart'

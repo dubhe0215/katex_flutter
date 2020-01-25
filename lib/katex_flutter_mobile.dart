@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
-import 'package:katex_flutter/katex_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import 'katex_flutter.dart';
 
 class KaTeXState extends State<KaTeX> {
   String _htmlString;
