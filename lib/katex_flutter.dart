@@ -1,5 +1,6 @@
 library katex_flutter;
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 import 'dart:js' as js;
@@ -49,57 +50,6 @@ class _KaTeXState extends State<KaTeX> {
   @override
   void initState() {
     generateHTMLCode();
-    if (kIsWeb) {
-      var _webTeXCode = widget.laTeX.replaceAll(widget.delimiter, '');
-      _webTeXCode = _webTeXCode.replaceAll(widget.displayDelimiter, '');
-      var htmlCode = js.context['katex'].callMethod("renderToString", [
-        _webTeXCode,
-        {
-          'displayMode': false,
-          'output': 'html'
-          //'macros': {"\\RR": "\\mathbb{R}"}
-        }
-      ]);
-      //SpanElement katex_span=
-      ui.platformViewRegistry.registerViewFactory(
-          'iframe',
-          (int viewId) => IFrameElement()
-            ..classes = ['katex_flutter_code']
-            ..style.border = 'none'
-            ..src = Uri.dataFromString(
-                    '''<html>
-<head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-  <style>
-    :root {
-      color: #${widget.color.value.toRadixString(16).substring(2)}!important;
-      background: #${widget.background.value.toRadixString(16).substring(2)}!important;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
-    body { overflow: auto; }
-    #katex_flutter {
-      display: inline-block;
-      width: auto;
-      height: auto;
-      overflow: auto;
-    }
-  </style>
-</head>
-<body><span id="katex_flutter">''' +
-                        htmlCode +
-                        '''
-</span></body>
-</html>''',
-                    mimeType: 'text/html',
-                    encoding: utf8)
-                .toString()
-            ..setInnerHtml(
-              htmlCode,
-            ));
-    }
     super.initState();
   }
 
@@ -107,8 +57,17 @@ class _KaTeXState extends State<KaTeX> {
   Widget build(BuildContext context) {
     // Returning native HtmlElementView for Web. Otherwise WebView
     if (kIsWeb) {
+      // Creating a unique identifier for the platform channel
+      String id=DateTime.now().microsecondsSinceEpoch.toString();
+      Timer(Duration(milliseconds: 500), (){
+        js.context.callMethod('katex_flutter_render');
+      });
+      ui.platformViewRegistry.registerViewFactory(
+          id,
+          (int viewID) => SpanElement()..innerHtml=widget.laTeX..classes=['katex_flutter_code']
+          );
       return (HtmlElementView(
-        viewType: 'iframe',
+        viewType: id,
       ));
       //return(Text(widget.laTeX));
     } else {

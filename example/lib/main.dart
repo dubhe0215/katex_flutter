@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter KaTeX Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'KaTeX Flutter Home Page'),
     );
   }
 }
@@ -58,48 +58,58 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  TextEditingController _laTeXInputController =
+      TextEditingController(text: '\$(x-2) \\cdot (x^2 + 25)\$');
+  String _laTeX;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    _renderLaTeX();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Container(
-          //   width: 600,
-          //   height: 600,
-          child: KaTeX(
-              laTeX: '\$(x-2) \\cdot (x^2 + 25)\$'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      labelText: 'Your LaTeX code here',
+                      helperText:
+                          'Use \$ as delimiter. Use \$\$ for display LaTeX.'),
+                  controller: _laTeXInputController,
+                ),
+              ),
+              Container(
+                width: 600,
+                height: 600,
+                child: KaTeX(laTeX: _laTeX),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _renderLaTeX,
+        tooltip: 'Render LaTeX',
+        label: Text('Render LaTeX'),
+        icon: Icon(Icons.crop_rotate),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _renderLaTeX() {
+    setState(() {
+      _laTeX = _laTeXInputController.text;
+    });
   }
 }
