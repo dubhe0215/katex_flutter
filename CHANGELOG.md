@@ -1,3 +1,7 @@
+## 2.0.2+8 - Fixed equations displayed twice
+
+ * Fixed some equations rendered twice due to inpropper MathML compatibility
+
 ## 2.0.1+7 - Fixed rendering of several equations
 
  * Fixed issues when using several different KaTeX-Widgets on web platform

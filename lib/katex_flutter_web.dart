@@ -12,9 +12,7 @@ class KaTeXState extends State<KaTeX> {
   Widget build(BuildContext context) {
     // Creating a unique identifier for the platform channel
     String id = DateTime.now().microsecondsSinceEpoch.toString();
-    Timer(Duration(milliseconds: 250), () {
-      js.context.callMethod('katex_flutter_render',[id]);
-    });
+    js.context.callMethod('katex_flutter_render',[id]);
     ui.platformViewRegistry.registerViewFactory(
         id,
         (int viewID) => SpanElement()
