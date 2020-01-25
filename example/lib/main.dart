@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   width: 600,
           //   height: 600,
           child: KaTeX(
-              laTeX: '\$(x-2) \\cdot (x^2 + 25) \\cdot (x+4) = 0\$'),
+              laTeX: '\$(x-2) \\cdot (x^2 + 25)\$'),
         ),
       ),
       floatingActionButton: FloatingActionButton(
