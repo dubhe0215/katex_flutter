@@ -1,7 +1,7 @@
 import 'dart:io';
 
 void main(List<String> arguments) {
-  String js='''katex_flutter_boundaries = {};
+  String js = '''katex_flutter_boundaries = {};
 function katex_flutter_render(id) {
     var foundCorrectPlatformView = false;
     // Selecting the correct platform view
