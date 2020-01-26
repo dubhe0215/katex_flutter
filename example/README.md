@@ -6,5 +6,6 @@ An example for the katex_flutter package.
 
 ```
 flutter pub get
+flutter pub run katex_flutter:main
 flutter run
 ```

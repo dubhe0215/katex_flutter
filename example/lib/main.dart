@@ -90,18 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   controller: _laTeXInputController,
                 ),
               ),
-              (kIsWeb)
-                  ? Container(
-                      width: 600,
-                      height: 600,
-                      child: KaTeX(laTeX: _laTeX),
-                    )
-                  : Container(
-                      child: KaTeX(
-                        laTeX: _laTeX,
-                        background: Colors.grey[50],
-                      ),
-                    )
+              Container(
+                child: KaTeX(
+                  laTeX: _laTeX,
+                  background: Colors.grey[50],
+                ),
+              )
             ],
           ),
         ),
