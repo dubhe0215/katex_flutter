@@ -38,7 +38,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^2.0.1+7
+  katex_flutter: ^2.0.2+8
 ```
 
 ### 2. Install it
