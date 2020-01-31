@@ -16,18 +16,14 @@ class KaTeXState extends State<KaTeX> {
   @override
   void initState() {
     // Creating a unique identifier for the platform channel
-    platformId = DateTime
-        .now()
-        .microsecondsSinceEpoch
-        .toString();
+    platformId = DateTime.now().microsecondsSinceEpoch.toString();
     js.context.callMethod('katex_flutter_render', [platformId]);
     ui.platformViewRegistry.registerViewFactory(
         platformId,
-            (int viewID) =>
-        SpanElement()
+        (int viewID) => SpanElement()
           ..innerHtml = widget.laTeX
           ..classes = ['katex_flutter_code']
-        ..id='katex_flutter_$platformId');
+          ..id = 'katex_flutter_$platformId');
     _getDOMboundary(platformId);
 
     super.initState();

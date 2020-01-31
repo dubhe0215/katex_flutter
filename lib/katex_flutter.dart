@@ -1,14 +1,14 @@
 library katex_flutter;
 
-import 'katex_flutter_stub.dart'
-    // ignore: uri_does_not_exist
-    if (dart.library.io) 'katex_flutter_mobile.dart'
-    // ignore: uri_does_not_exist
-    if (dart.library.html) 'katex_flutter_web.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
+import 'katex_flutter_stub.dart'
+// ignore: uri_does_not_exist
+    if (dart.library.io) 'katex_flutter_mobile.dart'
+// ignore: uri_does_not_exist
+    if (dart.library.html) 'katex_flutter_web/widgets.dart';
 
 /// The basic WebView for displaying the created HTML String
 class KaTeX extends StatefulWidget {
