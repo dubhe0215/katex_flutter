@@ -1,3 +1,7 @@
+## 2.2.0+12 - Fixed overflow on web platform
+
+ * The compution ot the required width is now no longer limited to 200px (the initial width)
+
 ## 2.1.0+10 - Working dynamic boundaries on web platform
 
  * The web platform can now compute the Widget's width and height on it's own. No more need for `SizedBox` wrap.

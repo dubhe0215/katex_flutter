@@ -36,7 +36,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^2.1.0+10
+  katex_flutter: ^2.2.0+12
 ```
 You can install packages from the command line with Flutter:
 
@@ -66,6 +66,8 @@ Add the following code into the `<head>...</head>` section of your `web/index.ht
     crossorigin="anonymous"></script>
 <script src="katex_flutter.js"></script>
 ```
+Alternatively you could add the path to a local KaTeX library as well. Note that this will only work on web platform but not on mobile devices.
+
 Then run:
 ```
 flutter pub run katex_flutter:main
