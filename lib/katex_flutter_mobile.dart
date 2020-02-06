@@ -101,7 +101,7 @@ class _KaTeXWebViewState extends State<KaTeXWebView> {
           name: 'RenderedWebViewWidth',
           onMessageReceived: (JavascriptMessage message) {
             // Setting the widget's width to the height posted by JavaScript
-            double viewWidth = double.parse(message.message) * 1.2;
+            double viewWidth = double.parse(message.message) * 1.3;
             setState(() {
               _width = viewWidth;
             });

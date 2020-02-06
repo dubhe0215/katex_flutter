@@ -36,7 +36,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^2.2.0+12
+  katex_flutter: ^2.3.0+14
 ```
 You can install packages from the command line with Flutter:
 
@@ -75,6 +75,16 @@ flutter pub run katex_flutter:main
 This will generate the required files in your `web` folder.
 
 If you want to use different LaTeX delimiters than `$` for inline and `$$` for display LaTeX in web, you should modify the `delimiters` section in `web/katex_flutter.js`. In future releases these manual changes will become unneccesairy. We just didn't have enough of time for coding a dynamic implimentation.
+
+## Android-only: update `android/app/src/main/AndroidManifest.xml`
+
+Due to an issue in the `webview_flutter` plugin you need to add the following to your `android/app/src/main/AndroidManifest.xml`:
+
+```xml
+<uses-permission android:name="android.permission.WAKE_LOCK" />
+```
+
+The issue is tracked at https://github.com/flutter/flutter/issues/49912
 
 ## Source code
 

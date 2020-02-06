@@ -25,6 +25,11 @@ function katex_flutter_render(id) {
             texView.style.overflow = 'auto';
             texView.style.width = 'auto';
             texView.style.height = 'auto';
+            var innerContainer = texView.querySelector('.katex_flutter_inner_container');
+            innerContainer.style.display = 'inline-block';
+            innerContainer.style.width = 'auto';
+            innerContainer.style.height = 'auto';
+            
             // Marking as rendered
             texView.classList.add('katex_fluter_rendered');
             renderMathInElement(texView, {
@@ -39,7 +44,7 @@ function katex_flutter_render(id) {
                     display: true
                 }]
             });
-            katex_flutter_boundaries[id] = { 'width': getComputedStyle(texView).width, 'height': getComputedStyle(texView).height };
+            katex_flutter_boundaries[id] = { 'width': getComputedStyle(texView.querySelector('.katex_flutter_inner_container')).width, 'height': getComputedStyle(texView.querySelector('.katex_flutter_inner_container')).height };
         }
     })
     // Checking if the platform view was found. If not, waiting and trying again...

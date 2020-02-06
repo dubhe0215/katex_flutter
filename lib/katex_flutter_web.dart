@@ -10,7 +10,7 @@ import 'katex_flutter.dart';
 
 class KaTeXState extends State<KaTeX> {
   double _height = 50;
-  double _width = 200;
+  double _width;
   String platformId;
 
   @override
@@ -21,7 +21,9 @@ class KaTeXState extends State<KaTeX> {
     ui.platformViewRegistry.registerViewFactory(
         platformId,
         (int viewID) => SpanElement()
-          ..innerHtml = widget.laTeX
+          ..innerHtml = "<span class=\"katex_flutter_inner_container\">" +
+              widget.laTeX +
+              "</span>"
           ..classes = ['katex_flutter_code']
           ..id = 'katex_flutter_$platformId');
     _getDOMboundary(platformId);
@@ -50,9 +52,12 @@ class KaTeXState extends State<KaTeX> {
       });
       return;
     }
+    print(boundary['width']);
+    print(boundary['height']);
     setState(() {
-      _width = double.parse(boundary['width'].replaceFirst('px', '')) * 1.2;
       _height = double.parse(boundary['height'].replaceFirst('px', '')) * 1.2;
+      if (!widget.inheritWidth)
+        _width = double.parse(boundary['width'].replaceFirst('px', '')) * 1.3;
     });
   }
 }

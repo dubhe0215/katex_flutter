@@ -59,8 +59,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _laTeXInputController =
-      TextEditingController(text: '\$(x-2) \\cdot (x^2 + 25)\$');
+  TextEditingController _laTeXInputController = TextEditingController(text: '''
+\$ G_{p,q}^{m,n} \\left(\\begin{matrix}a_1, \\ldots, a_n & a_{n+1}, \\ldots, a_p b_1, \\ldots, b_m & b_{m+1}, \\ldots, b_q
+ \\end{matrix} \\bigg| z \\right). \$''');
   String _laTeX;
 
   @override
@@ -83,6 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   decoration: InputDecoration(
                       labelText: 'Your LaTeX code here',
                       helperText:
@@ -102,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _renderLaTeX,
-        tooltip: 'Render LaTeX',
+        tooltip: 'Render again. Not yet implimented for the web.',
         label: Text('Render LaTeX'),
         icon: Icon(Icons.crop_rotate),
       ), // This trailing comma makes auto-formatting nicer for build methods.
