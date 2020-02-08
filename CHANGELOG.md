@@ -1,3 +1,8 @@
+## 2.4.0+16 - Added offline support
+
+ * Support for rendering equations offline on Android and the web
+ * Support for custom delimiters on the web
+
 ## 2.3.0+14 - Implemented automatic width for web platform
 
  * Implemented automatic width for the web platform
