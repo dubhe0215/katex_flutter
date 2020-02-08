@@ -12,11 +12,11 @@ Rendering is done using **[KaTeX](https://github.com/KaTeX/KaTeX)**.
 
 **katex_flutter** is working on Android, iOS, and the web platform. Desktop support is planned.
 
-On mobile platofrom this package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin.
+On mobile platforms this package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin. On Android and the web `katex_flutter` fully runs offline.
 
-On web platform this package directly into Flutter's platfrom view's shadow root.
+On web platform this package directly into Flutter's platform view's shadow root.
 
-**Unlike flutter_tex it does not create a local web server. This increases the performance significantly and allows non-mobile platforms.**
+Unlike flutter_tex it does not create a local web server. This increases the performance significantly and allows non-mobile platforms.
 
 ## API
 
@@ -56,27 +56,15 @@ import 'package:katex_flutter/katex_flutter.dart';
 Add the following code into the `<head>...</head>` section of your `web/index.html`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-    integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"
-    integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz"
-    crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"
-    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
-    crossorigin="anonymous"></script>
-<script src="katex_flutter.js"></script>
+<link rel="stylesheet" href="packages/katex_flutter/katex_js/katex.min.css">
+<script defer src="packages/katex_flutter/katex_js/katex.min.js"></script>
+<script defer src="packages/katex_flutter/katex_js/contrib/auto-render.min.js"></script>
+<script src="packages/katex_flutter/katex_flutter.js"></script>
 ```
-Alternatively you could add the path to a local KaTeX library as well. Note that this will only work on web platform but not on mobile devices.
-
-Then run:
-```
-flutter pub run katex_flutter:main
-```
-This will generate the required files in your `web` folder.
-
-If you want to use different LaTeX delimiters than `$` for inline and `$$` for display LaTeX in web, you should modify the `delimiters` section in `web/katex_flutter.js`. In future releases these manual changes will become unneccesairy. We just didn't have enough of time for coding a dynamic implimentation.
 
 ## Android-only: update `android/app/src/main/AndroidManifest.xml`
+
+**Important:** To use `katex_flutter` on Android you have to copy `example/android/app/src/main/assets` to your project's `android/app/src/main/`.
 
 Due to an issue in the `webview_flutter` plugin you need to add the following to your `android/app/src/main/AndroidManifest.xml`:
 

@@ -9,30 +9,24 @@ import 'package:flutter/widgets.dart';
 import 'katex_flutter.dart';
 
 class KaTeXState extends State<KaTeX> {
+  String _lastKnownLaTeXCode = '';
   double _height = 50;
   double _width;
   String platformId;
 
   @override
   void initState() {
-    // Creating a unique identifier for the platform channel
-    platformId = DateTime.now().microsecondsSinceEpoch.toString();
-    js.context.callMethod('katex_flutter_render', [platformId]);
-    ui.platformViewRegistry.registerViewFactory(
-        platformId,
-        (int viewID) => SpanElement()
-          ..innerHtml = "<span class=\"katex_flutter_inner_container\">" +
-              widget.laTeX +
-              "</span>"
-          ..classes = ['katex_flutter_code']
-          ..id = 'katex_flutter_$platformId');
-    _getDOMboundary(platformId);
-
+    _createDOMElement();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.laTeX != _lastKnownLaTeXCode) {
+      setState(() {
+        _createDOMElement();
+      });
+    }
     return SizedBox(
       width: _width,
       height: _height,
@@ -59,5 +53,21 @@ class KaTeXState extends State<KaTeX> {
       if (!widget.inheritWidth)
         _width = double.parse(boundary['width'].replaceFirst('px', '')) * 1.3;
     });
+  }
+
+  void _createDOMElement() {
+    _lastKnownLaTeXCode = widget.laTeX;
+    // Creating a unique identifier for the platform channel
+    platformId = DateTime.now().microsecondsSinceEpoch.toString();
+    js.context.callMethod('katex_flutter_render', [platformId]);
+    ui.platformViewRegistry.registerViewFactory(
+        platformId,
+        (int viewID) => SpanElement()
+          ..innerHtml = "<span class=\"katex_flutter_inner_container\">" +
+              widget.laTeX +
+              "</span>"
+          ..classes = ['katex_flutter_code']
+          ..id = 'katex_flutter_$platformId');
+    _getDOMboundary(platformId);
   }
 }
