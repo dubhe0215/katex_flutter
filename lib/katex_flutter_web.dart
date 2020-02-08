@@ -46,8 +46,6 @@ class KaTeXState extends State<KaTeX> {
       });
       return;
     }
-    print(boundary['width']);
-    print(boundary['height']);
     setState(() {
       _height = double.parse(boundary['height'].replaceFirst('px', '')) * 1.2;
       if (!widget.inheritWidth)

@@ -55,8 +55,6 @@ class KaTeXState extends State<KaTeX> {
   @override
   Widget build(BuildContext context) {
     if (widget.laTeX != _lastKnownLaTeXCode) renderLaTeX();
-    print(_height);
-    print(_width);
     return SizedBox(
       height: _height,
       width: _width,
