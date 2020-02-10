@@ -62,7 +62,10 @@ Add the following code into the `<head>...</head>` section of your `web/index.ht
 <script src="packages/katex_flutter/katex_flutter.js"></script>
 ```
 
-## Android-only: update `android/app/src/main/AndroidManifest.xml`
+In your project, create a `web/packages/katex_flutter` folder.
+Now copy `katex_flutter`'s `lib/{katex_flutter.js,katex_js}` into your `web/packages/katex_flutter/`.
+
+## Android-only: update `android/app/src/main/`
 
 **Important:** To use `katex_flutter` on Android you have to copy `example/android/app/src/main/assets` to your project's `android/app/src/main/`.
 
