@@ -24,7 +24,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
   @override
   Widget build(BuildContext context) {
     if (currentLaTex != widget.laTeX) generatePNG();
-    return (_texConverted) ? Image.file(pngFile) : Container();
+    return (_texConverted) ? Image.file(pngFile,semanticLabel: currentLaTex,) : Container();
   }
 
   void generatePNG() async {
@@ -49,6 +49,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
 
       pngFile = File(tmpDir + '/katex.png');
       _texConverted = true;
+      currentLaTex = widget.laTeX;
     } catch (e) {
       widget.onError(e);
     }
@@ -56,6 +57,9 @@ class KaTeXStateDesktop extends State<KaTeX> {
   }
 
   Future<String> _generateTmpDir() async {
+    // Preparing LaTeX String
+    String laTeX = widget.laTeX;
+    laTeX = laTeX.replaceAll(RegExp('<\\s*[bB][rR](\\s|\\/)*>'), '\\\\*');
     // Determinating the correct TMP path
     String path =
         (Platform.isWindows ? '%TEMP%' : '/tmp') + '/katex_flutter/$platformId';
@@ -67,7 +71,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
     texFileAccess.writeStringSync('''
 \\documentclass[preview]{standalone}
 \\begin{document}
-${widget.laTeX}
+$laTeX
 \\end{document}
 ''');
     texFileAccess.flushSync();
