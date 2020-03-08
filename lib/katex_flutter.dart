@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import 'katex_flutter_stub.dart'
 // ignore: uri_does_not_exist
-    if (dart.library.io) 'katex_flutter_mobile.dart'
+    if (dart.library.io) 'katex_flutter_io.dart'
 // ignore: uri_does_not_exist
     if (dart.library.html) 'katex_flutter_web.dart';
 
@@ -30,6 +30,9 @@ class KaTeX extends StatefulWidget {
   // Whether to use the parent's width or only the minimum required by the equation
   final bool inheritWidth;
 
+  // Function to be executed on error. USefull for Desktop platforms
+  final Function onError;
+
   KaTeX(
       {Key key,
       @required this.laTeX,
@@ -37,8 +40,12 @@ class KaTeX extends StatefulWidget {
       this.displayDelimiter = '\$\$',
       this.color = Colors.black,
       this.background = Colors.white,
-      this.inheritWidth = true});
+      this.inheritWidth = true,
+      this.onError});
 
   @override
-  KaTeXState createState() => KaTeXState();
+  State<KaTeX> createState() {
+    // As different platforms require different implimentations we we created a function for choosing
+    return chooseStateForPlatform();
+  }
 }

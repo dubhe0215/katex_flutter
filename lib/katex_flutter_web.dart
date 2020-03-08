@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 
 import 'katex_flutter.dart';
 
-class KaTeXState extends State<KaTeX> {
+class KaTeXStateWeb extends State<KaTeX> {
   String _lastKnownLaTeXCode = '';
   double _height = 50;
   double _width;
@@ -69,3 +69,7 @@ class KaTeXState extends State<KaTeX> {
     _getDOMboundary(platformId);
   }
 }
+
+// No more conditions, returning same state on every
+// JS-capable platform
+State<KaTeX> chooseStateForPlatform() => KaTeXStateWeb();

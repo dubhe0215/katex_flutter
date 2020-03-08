@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'katex_flutter.dart';
 
-class KaTeXState extends State<KaTeX> {
+class KaTeXStateMobile extends State<KaTeX> {
   static const String _katexCDN = "https://cdn.jsdelivr.net/npm/katex/dist";
   String _lastKnownLaTeXCode = '';
   WebView _webView;
