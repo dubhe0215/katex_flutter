@@ -16,14 +16,14 @@ class KaTeXStateDesktop extends State<KaTeX> {
   @override
   void initState() {
     platformId = DateTime.now().microsecondsSinceEpoch.toString();
-    currentLaTex=widget.laTeX;
+    currentLaTex = widget.laTeX;
     generatePNG();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if(currentLaTex!=widget.laTeX) generatePNG();
+    if (currentLaTex != widget.laTeX) generatePNG();
     return (_texConverted) ? Image.file(pngFile) : Container();
   }
 

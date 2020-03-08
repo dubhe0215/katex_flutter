@@ -41,43 +41,42 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('KaTeX Flutter Home Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  decoration: InputDecoration(
-                      labelText: 'Your LaTeX code here',
-                      helperText:
-                          'Use \$ as delimiter. Use \$\$ for display LaTeX.'),
-                  controller: _laTeXInputController,
+        appBar: AppBar(
+          title: Text('KaTeX Flutter Home Page'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        labelText: 'Your LaTeX code here',
+                        helperText:
+                            'Use \$ as delimiter. Use \$\$ for display LaTeX.'),
+                    controller: _laTeXInputController,
+                  ),
                 ),
-              ),
-              Container(
-                child: KaTeX(
-                  laTeX: _laTeX,
-                  background: Colors.grey[50],
-                ),
-              )
-            ],
+                Container(
+                  child: KaTeX(
+                    laTeX: _laTeX,
+                    background: Colors.grey[50],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _renderLaTeX,
-        tooltip: 'Render again. Only working on mobile platform.',
-        label: Text('Render LaTeX'),
-        icon: Icon(Icons.crop_rotate),
-      )
-    );
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: _renderLaTeX,
+          tooltip: 'Render again. Only working on mobile platform.',
+          label: Text('Render LaTeX'),
+          icon: Icon(Icons.crop_rotate),
+        ));
   }
 
   void _renderLaTeX() {

@@ -1,3 +1,9 @@
+## 3.0.0+17 - Initial Desktop support
+
+ * Support Fuchsia, macOS, Windows and Linux
+ * Still requires local [TeX Live](https://www.tug.org/texlive/) and [ImageMagick](https://imagemagick.org/index.php) installation
+ * Support for go-flutter
+
 ## 2.4.0+16 - Added offline support
 
  * Support for rendering equations offline on Android and the web

@@ -27,7 +27,8 @@ KaTeX(
   displayDelimiter = '\$\$',   // The delimiter to be used for Display (centered, "important") LaTeX
   color = Colors.black,        // Background color
   background = Colors.white,   // Text color
-  inheritWidth = true);        // Whether to use the parent's width or only the minimum required by the equation
+  inheritWidth = true,         // Whether to use the parent's width or only the  minimum required by the equation
+  onError);                    // Function(String errorMessage) to be executed on Error. Useful for dependency warnings on Desktop.
 ```
 
 ## Use this package as a library
@@ -51,7 +52,9 @@ Now in your Dart code, you can use:
 import 'package:katex_flutter/katex_flutter.dart';
 ```
 
-## Web-only: update `web/index.html`
+## Platform specific
+
+### Web-only: update `web/index.html`
 
 Add the following code into the `<head>...</head>` section of your `web/index.html`:
 
@@ -65,7 +68,7 @@ Add the following code into the `<head>...</head>` section of your `web/index.ht
 In your project, create a `web/packages/katex_flutter` folder.
 Now copy `katex_flutter`'s `lib/{katex_flutter.js,katex_js}` into your `web/packages/katex_flutter/`.
 
-## Android-only: update `android/app/src/main/`
+### Android-only: update `android/app/src/main/`
 
 **Important:** To use `katex_flutter` on Android you have to copy `example/android/app/src/main/assets` to your project's `android/app/src/main/`.
 
@@ -76,6 +79,13 @@ Due to an issue in the `webview_flutter` plugin you need to add the following to
 ```
 
 The issue is tracked at https://github.com/flutter/flutter/issues/49912
+
+### Desktop
+
+Desktop platforms are supported by native Flutter Desktop as well as go-flutter. You are required to install
+
+ - **[TeX Live](https://www.tug.org/texlive/)** for `pdflatex` command
+ - **[ImageMagick](https://imagemagick.org/index.php)** for `convert` command
 
 ## Source code
 
