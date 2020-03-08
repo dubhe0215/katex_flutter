@@ -10,7 +10,7 @@ Render scientific equations using the KaTeX library.
 
 Rendering is done using **[KaTeX](https://github.com/KaTeX/KaTeX)**.
 
-**katex_flutter** is working on Android, iOS, and the web platform. Desktop support is planned.
+**katex_flutter** is working on Android, iOS, the Web and the Desktop platform.
 
 On mobile platforms this package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin. On Android and the web `katex_flutter` fully runs offline.
 
@@ -37,7 +37,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^2.3.0+14
+  katex_flutter: ^3.0.1+18
 ```
 You can install packages from the command line with Flutter:
 
