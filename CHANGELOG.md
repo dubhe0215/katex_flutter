@@ -1,3 +1,7 @@
+## 3.0.1+19 - Fixed Windows %TEMP% location
+
+ * Fixed the temporary file's location on Windows
+
 ## 3.0.0+17 - Initial Desktop support
 
  * Support Fuchsia, macOS, Windows and Linux
