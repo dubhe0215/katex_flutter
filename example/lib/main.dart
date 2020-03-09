@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: KaTeX(
                     laTeX: _laTeX,
                     background: Colors.grey[50],
+                    //onError: (e)=>print(e),
                   ),
                 )
               ],

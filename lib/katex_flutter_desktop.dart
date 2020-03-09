@@ -24,7 +24,12 @@ class KaTeXStateDesktop extends State<KaTeX> {
   @override
   Widget build(BuildContext context) {
     if (currentLaTex != widget.laTeX) generatePNG();
-    return (_texConverted) ? Image.file(pngFile,semanticLabel: currentLaTex,) : Container();
+    return (_texConverted)
+        ? Image.file(
+            pngFile,
+            semanticLabel: currentLaTex,
+          )
+        : Container();
   }
 
   void generatePNG() async {
@@ -61,8 +66,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
     String laTeX = widget.laTeX;
     laTeX = laTeX.replaceAll(RegExp('<\\s*[bB][rR](\\s|\\/)*>'), '\\\\*');
     // Determinating the correct TMP path
-    String path =
-        (Platform.isWindows ? '%TEMP%' : '/tmp') + '/katex_flutter/$platformId';
+    String path = Directory.systemTemp.path + '/katex_flutter/$platformId';
     // Creating sub folder
     await Directory(path).create(recursive: true);
     // Populating the input TeX file
