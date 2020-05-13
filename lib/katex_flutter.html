@@ -2,11 +2,11 @@
 <html>
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="stylesheet" href="katex_js/katex.min.css">
-  <script defer src="katex_js/katex.min.js"></script>
-  <script defer src="katex_js/contrib/auto-render.min.js"></script>
-  <script>
+    <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport">
+    <link href="katex_js/katex.min.css" rel="stylesheet">
+    <script defer src="katex_js/katex.min.js"></script>
+    <script defer src="katex_js/contrib/auto-render.min.js"></script>
+    <script>
     urlArguments = new URLSearchParams(location.search);
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -22,8 +22,9 @@
       if ("RenderedWebViewHeight" in window) RenderedWebViewHeight.postMessage(height);
       if ("RenderedWebViewWidth" in window) RenderedWebViewWidth.postMessage(width);
     });
-  </script>
-  <style>
+
+    </script>
+    <style>
     html,
     body {
       margin: 0;
@@ -40,14 +41,16 @@
       height: auto;
       overflow: auto;
     }
-  </style>
+
+    </style>
 </head>
 
 <body>
-  <div id="katex_flutter"></div>
+<div id="katex_flutter"></div>
 </body>
 <script>
   document.body.setAttribute('style', 'background-color: '+urlArguments.get('background')+'; color: '+urlArguments.get('color')+';');
+
 </script>
 
 </html>
