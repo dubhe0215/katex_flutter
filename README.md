@@ -1,6 +1,6 @@
 # katex_flutter
 
-Render scientific equations using the KaTeX library.
+Render scientific LaTeX equations using the KaTeX library.
 
 - **Mathematics / Maths Equations** (Algebra, Calculus, Geometry, Geometry etc...)
 - **Physics Equations**
@@ -37,7 +37,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^3.0.1+18
+  katex_flutter: ^3.1.0+20
 ```
 You can install packages from the command line with Flutter:
 
@@ -59,18 +59,12 @@ import 'package:katex_flutter/katex_flutter.dart';
 Add the following code into the `<head>...</head>` section of your `web/index.html`:
 
 ```html
-<link rel="stylesheet" href="packages/katex_flutter/katex_js/katex.min.css">
-<script defer src="packages/katex_flutter/katex_js/katex.min.js"></script>
-<script defer src="packages/katex_flutter/katex_js/contrib/auto-render.min.js"></script>
-<script src="packages/katex_flutter/katex_flutter.js"></script>
+<link rel="stylesheet" href="/assets/packages/katex_flutter/lib/katex_js/katex.min.css">
+<script defer src="/assets/packages/katex_flutter/lib/katex_js/katex.min.js"></script>
+<script defer src="/assets/packages/katex_flutter/lib/katex_js/contrib/auto-render.min.js"></script>
+<script src="/assets/packages/katex_flutter/lib/katex_flutter.js"></script>
 ```
-
-In your project, create a `web/packages/katex_flutter` folder.
-Now copy `katex_flutter`'s `lib/{katex_flutter.js,katex_js}` into your `web/packages/katex_flutter/`.
-
 ### Android-only: update `android/app/src/main/`
-
-**Important:** To use `katex_flutter` on Android you have to copy `example/android/app/src/main/assets` to your project's `android/app/src/main/`.
 
 Due to an issue in the `webview_flutter` plugin you need to add the following to your `android/app/src/main/AndroidManifest.xml`:
 
@@ -82,7 +76,7 @@ The issue is tracked at https://github.com/flutter/flutter/issues/49912
 
 ### Desktop
 
-Desktop platforms are supported by native Flutter Desktop as well as go-flutter. You are required to install
+Desktop platforms are supported by native Flutter Desktop as well as go-flutter but support is very unstable. You are required to install
 
  - **[TeX Live](https://www.tug.org/texlive/)** for `pdflatex` command
  - **[ImageMagick](https://imagemagick.org/index.php)** for `convert` command
@@ -91,4 +85,4 @@ Desktop platforms are supported by native Flutter Desktop as well as go-flutter.
 
 The source code is hosted on [GitLab](https://gitlab.com/testapp-system/katex_flutter). It's licensed under the terms and conditions of the [`EUPL-1.2`](LICENSE).
 
-This package was initially created for the education project **[TestApp](https://gitlab.com/testapp-system/testapp-flutter)**.
+This package was initially created for the education project **[TestApp](https://www.testapp.ga/)**.

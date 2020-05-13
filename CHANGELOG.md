@@ -1,3 +1,7 @@
+## 3.1.0+20 - Removed requirement for assets on Android and the web
+
+ * You no longer need to copy the original KaTeX JS library into your app as it is now integrated into the package.
+
 ## 3.0.1+19 - Fixed Windows %TEMP% location
 
  * Fixed the temporary file's location on Windows

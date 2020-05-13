@@ -3,9 +3,9 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <link rel="stylesheet" href="katex/katex.min.css">
-  <script defer src="katex/katex.min.js"></script>
-  <script defer src="katex/contrib/auto-render.min.js"></script>
+  <link rel="stylesheet" href="katex_js/katex.min.css">
+  <script defer src="katex_js/katex.min.js"></script>
+  <script defer src="katex_js/contrib/auto-render.min.js"></script>
   <script>
     urlArguments = new URLSearchParams(location.search);
 
@@ -47,8 +47,7 @@
   <div id="katex_flutter"></div>
 </body>
 <script>
-  document.querySelector('html').style.color = urlArguments.get('color');
-  document.querySelector('html').style.background = urlArguments.get('background');
+  document.body.setAttribute('style', 'background-color: '+urlArguments.get('background')+'; color: '+urlArguments.get('color')+';');
 </script>
 
 </html>
