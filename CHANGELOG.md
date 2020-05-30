@@ -1,3 +1,7 @@
+## 3.2.0+21 - Added custom font families
+
+ * Inheriting text style from parent element / parenting build context
+
 ## 3.1.0+20 - Removed requirement for assets on Android and the web
 
  * You no longer need to copy the original KaTeX JS library into your app as it is now integrated into the package.

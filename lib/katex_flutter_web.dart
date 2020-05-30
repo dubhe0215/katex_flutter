@@ -22,7 +22,7 @@ class KaTeXStateWeb extends State<KaTeX> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.laTeX != _lastKnownLaTeXCode) {
+    if (widget.laTeXCode.data != _lastKnownLaTeXCode) {
       setState(() {
         _createDOMElement();
       });
@@ -54,15 +54,17 @@ class KaTeXStateWeb extends State<KaTeX> {
   }
 
   void _createDOMElement() {
-    _lastKnownLaTeXCode = widget.laTeX;
+    _lastKnownLaTeXCode = widget.laTeXCode.data;
     // Creating a unique identifier for the platform channel
     platformId = DateTime.now().microsecondsSinceEpoch.toString();
-    js.context.callMethod('katex_flutter_render', [platformId]);
+    List args = [platformId, styleString(context, widget.laTeXCode)];
+    print(args);
+    js.context.callMethod('katex_flutter_render', args);
     ui.platformViewRegistry.registerViewFactory(
         platformId,
         (int viewID) => SpanElement()
           ..innerHtml = "<span class=\"katex_flutter_inner_container\">" +
-              widget.laTeX +
+              widget.laTeXCode.data +
               "</span>"
           ..classes = ['katex_flutter_code']
           ..id = 'katex_flutter_$platformId');

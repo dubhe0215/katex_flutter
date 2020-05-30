@@ -12,7 +12,11 @@ import 'katex_flutter_stub.dart'
 
 /// The basic WebView for displaying the created HTML String
 class KaTeX extends StatefulWidget {
+  // a Text used for the rendered code as well as for the style
+  final Text laTeXCode;
   // The LaTeX code to be rendered
+
+  @deprecated
   final String laTeX;
 
   // The delimiter to be used for inline LaTeX
@@ -25,27 +29,37 @@ class KaTeX extends StatefulWidget {
   final Color background;
 
   // Text color
+  @deprecated
   final Color color;
 
   // Whether to use the parent's width or only the minimum required by the equation
   final bool inheritWidth;
 
-  // Function to be executed on error. USefull for Desktop platforms
+  // Function to be executed on error. Useful for Desktop platforms
   final Function onError;
 
   KaTeX(
       {Key key,
-      @required this.laTeX,
+      this.laTeX,
       this.delimiter = '\$',
       this.displayDelimiter = '\$\$',
-      this.color = Colors.black,
+      this.color,
       this.background = Colors.white,
       this.inheritWidth = true,
-      this.onError});
+      this.onError,
+      @required this.laTeXCode});
 
   @override
   State<KaTeX> createState() {
-    // As different platforms require different implimentations we we created a function for choosing
+    // As different platforms require different implementations we we created a function for choosing
     return chooseStateForPlatform();
   }
+}
+
+String styleString(BuildContext context, Text text) {
+  TextStyle style = text.style;
+  if (style == null) style = Theme.of(context).textTheme.bodyText1;
+  return '''
+color: #${style.color.value.toRadixString(16).substring(2).replaceAll('+', '')};
+font: ${style.fontSize}px '${style.fontFamily}', sans-serif;''';
 }

@@ -1,4 +1,4 @@
-# katex_flutter
+# katex\_flutter
 
 Render scientific LaTeX equations using the KaTeX library.
 
@@ -7,26 +7,29 @@ Render scientific LaTeX equations using the KaTeX library.
 - **Signal Processing Equations**
 - **Chemistry Equations**
 - **Statistics / Stats Equations**
+- **Inherit text style from parent widgets**
 
-Rendering is done using **[KaTeX](https://github.com/KaTeX/KaTeX)**.
+*Note: The bad pub.dev score is due to a known error in the analysis server and not our fault.*
+
+LaTeX rendering is done using **[KaTeX](https://github.com/KaTeX/KaTeX)**.
 
 **katex_flutter** is working on Android, iOS, the Web and the Desktop platform.
 
-On mobile platforms this package mainly depends on [webview_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin. On Android and the web `katex_flutter` fully runs offline.
+On mobile platforms this package mainly depends on [webview\_flutter](https://pub.dartlang.org/packages/webview_flutter) plugin. On Android, Desktops and the web `katex_flutter` fully runs offline.
 
 On web platform this package directly into Flutter's platform view's shadow root.
 
-Unlike flutter_tex it does not create a local web server. This increases the performance significantly and allows non-mobile platforms.
+Unlike flutter\_tex it does not create a local web server. This increases the performance significantly and allows non-mobile platforms.
 
 ## API
 
+**Note: we recently did significant API changes. Please update any prior code.**
 ```dart
 KaTeX(
-  @required laTeX,             // The LaTeX code to be rendered
+  @required laTeXCode,         // A Text() containing the LaTeX code to be rendered
   delimiter = '\$',            // The delimiter to be used for inline LaTeX
   displayDelimiter = '\$\$',   // The delimiter to be used for Display (centered, "important") LaTeX
-  color = Colors.black,        // Background color
-  background = Colors.white,   // Text color
+  background = Colors.white,   // Background color (web is ignoring this but using transparent instead)
   inheritWidth = true,         // Whether to use the parent's width or only the  minimum required by the equation
   onError);                    // Function(String errorMessage) to be executed on Error. Useful for dependency warnings on Desktop.
 ```
@@ -37,7 +40,7 @@ Add this to your package's pubspec.yaml file:
 
 ```yaml
 dependencies:
-  katex_flutter: ^3.1.0+20
+  katex_flutter: ^3.2.0+21
 ```
 You can install packages from the command line with Flutter:
 
@@ -50,6 +53,13 @@ Now in your Dart code, you can use:
 
 ```dart
 import 'package:katex_flutter/katex_flutter.dart';
+
+...
+
+return KaTeX(laTeXCode: Text("\\alpha", style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.red)))
 ```
 
 ## Platform specific
@@ -85,4 +95,4 @@ Desktop platforms are supported by native Flutter Desktop as well as go-flutter 
 
 The source code is hosted on [GitLab](https://gitlab.com/testapp-system/katex_flutter). It's licensed under the terms and conditions of the [`EUPL-1.2`](LICENSE).
 
-This package was initially created for the education project **[TestApp](https://www.testapp.ga/)**.
+This package was initially created for the education project **[TestApp](https://testapp.schule/)**.

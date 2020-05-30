@@ -19,7 +19,7 @@ class KaTeXStateMobile extends State<KaTeX> {
 
   @override
   void initState() {
-    _lastKnownLaTeXCode = widget.laTeX;
+    _lastKnownLaTeXCode = widget.laTeXCode.data;
     Set<JavascriptChannel> jsChannels = Set();
     jsChannels.add(JavascriptChannel(
         name: 'RenderedWebViewHeight',
@@ -54,7 +54,7 @@ class KaTeXStateMobile extends State<KaTeX> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.laTeX != _lastKnownLaTeXCode) renderLaTeX();
+    if (widget.laTeXCode.data != _lastKnownLaTeXCode) renderLaTeX();
     return SizedBox(
       height: _height,
       width: _width,
@@ -70,7 +70,7 @@ class KaTeXStateMobile extends State<KaTeX> {
   }
 
   String generateAppleHTMLCode({String laTeX}) {
-    if (laTeX == null) laTeX = widget.laTeX;
+    if (laTeX == null) laTeX = widget.laTeXCode.data;
     return '''<!DOCTYPE html>
 <html>
 <head>
@@ -92,7 +92,7 @@ class KaTeXStateMobile extends State<KaTeX> {
 </script>
 <style>
 :root {
-  color: #${widget.color.value.toRadixString(16).substring(2)}!important;
+  ${styleString(context, widget.laTeXCode)};
   background: #${widget.background.value.toRadixString(16).substring(2)}!important;
 }
 html, body {
@@ -108,21 +108,17 @@ body { overflow: auto; }
 }
 </style>
 </head>
-<body><div id="katex_flutter">${widget.laTeX}</div></body>
+<body><div id="katex_flutter">${widget.laTeXCode.data}</div></body>
 </html>''';
   }
 
   void renderLaTeX() {
-    _lastKnownLaTeXCode = widget.laTeX;
-    String fontColorHex = '#' +
-        widget.color.value.toRadixString(16).substring(2).replaceAll('+', '');
+    _lastKnownLaTeXCode = widget.laTeXCode.data;
     String backgroundColorHex = '#' +
         widget.background.value
             .toRadixString(16)
             .substring(2)
             .replaceAll('+', '');
-    print(backgroundColorHex);
-    print(fontColorHex);
     if (Platform.isAndroid) {
       _controller.loadUrl(Uri(
           scheme: 'file',
@@ -130,11 +126,11 @@ body { overflow: auto; }
           path:
               '/android_asset/flutter_assets/packages/katex_flutter/lib/katex_flutter.html',
           queryParameters: {
-            'laTeX': widget.laTeX,
+            'laTeX': widget.laTeXCode.data,
             'delimiter': widget.delimiter,
             'displayDelimiter': widget.displayDelimiter,
-            'color': "$fontColorHex!important",
             'background': "$backgroundColorHex!important",
+            'style': styleString(context, widget.laTeXCode),
           }).toString());
     } else {
       var localUri = Uri.dataFromString(generateAppleHTMLCode(),

@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   child: KaTeX(
-                    laTeX: _laTeX,
+                    laTeXCode: Text(_laTeX),
                     background: Colors.grey[50],
                     //onError: (e)=>print(e),
                   ),
