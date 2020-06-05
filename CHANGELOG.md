@@ -1,3 +1,7 @@
+## 3.3.0+23 - Stabilized Desktop support
+
+ * Improved integration with `texlive` and `ImageMagick`
+
 ## 3.2.0+21 - Added custom font families
 
  * Inheriting text style from parent element / parenting build context

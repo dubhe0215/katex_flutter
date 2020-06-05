@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 
 import 'katex_flutter.dart';
 
-// State<KaTeX> implimentation using native texbase binaries. Requires
+// State<KaTeX> implementation using native texbase binaries. Requires
 // local [TeX Live](https://www.tug.org/texlive/) and [ImageMagick](https://imagemagick.org/index.php)
-//  installation or similar `pdflatex` and `convert` implimentation
+// installation or similar `pdflatex` and `convert` implementation including LaTeX template `standalone`
 class KaTeXStateDesktop extends State<KaTeX> {
   String platformId;
   String currentLaTex;
@@ -65,7 +65,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
     // Preparing LaTeX String
     String laTeX = widget.laTeXCode.data;
     laTeX = laTeX.replaceAll(RegExp('<\\s*[bB][rR](\\s|\\/)*>'), '\\\\*');
-    // Determinating the correct TMP path
+    // Determining the correct TMP path
     String path = Directory.systemTemp.path + '/katex_flutter/$platformId';
     // Creating sub folder
     await Directory(path).create(recursive: true);

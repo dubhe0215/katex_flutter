@@ -1,5 +1,5 @@
 #include "window_configuration.h"
 
-const char *kFlutterWindowTitle = "Flutter Desktop Example";
-const unsigned int kFlutterWindowWidth = 800;
-const unsigned int kFlutterWindowHeight = 600;
+const char *kFlutterWindowTitle = "example";
+const unsigned int kFlutterWindowWidth = 1280;
+const unsigned int kFlutterWindowHeight = 720;

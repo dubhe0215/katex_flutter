@@ -56,10 +56,17 @@ import 'package:katex_flutter/katex_flutter.dart';
 
 ...
 
+// A static LaTeX block which may not change on `setState()`
 return KaTeX(laTeXCode: Text("\\alpha", style: Theme.of(context)
                       .textTheme
                       .bodyText1
                       .copyWith(color: Colors.red)))
+
+// A dynamic LaTeX block which is rebuilt on `setState()` (less efficient but required sometimes)
+return Builder(builder: (context) => KaTeX(laTeXCode: Text("\\alpha", style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.red))))
 ```
 
 ## Platform specific
@@ -86,10 +93,18 @@ The issue is tracked at https://github.com/flutter/flutter/issues/49912
 
 ### Desktop
 
-Desktop platforms are supported by native Flutter Desktop as well as go-flutter but support is very unstable. You are required to install
+Desktop platforms are supported by native Flutter Desktop as well as go-flutter but support is not perfectly stable yet. You are required to install
 
- - **[TeX Live](https://www.tug.org/texlive/)** for `pdflatex` command
+ - **[TeX Live](https://www.tug.org/texlive/)** for `pdflatex` command. (Template `standalone` is required which is delivered by `texlive-most`)
  - **[ImageMagick](https://imagemagick.org/index.php)** for `convert` command
+
+On some Linux distributions, ImageMagick requires an edit of it's policies: Insert the following in `/etc/ImageMagick-7/policy.xml` just before `</policymap>`
+```xml
+<policy domain="coder" rights="read | write" pattern="PDF" />
+```
+[Source: Stackoverflow](https://stackoverflow.com/a/53180170/9409389)
+
+*Please note: text color is not yet supported on Desktops.*
 
 ## Source code
 
