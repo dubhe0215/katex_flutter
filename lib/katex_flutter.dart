@@ -14,10 +14,6 @@ import 'katex_flutter_stub.dart'
 class KaTeX extends StatefulWidget {
   // a Text used for the rendered code as well as for the style
   final Text laTeXCode;
-  // The LaTeX code to be rendered
-
-  @deprecated
-  final String laTeX;
 
   // The delimiter to be used for inline LaTeX
   final String delimiter;
@@ -28,31 +24,36 @@ class KaTeX extends StatefulWidget {
   // Background color
   final Color background;
 
-  // Text color
-  @deprecated
-  final Color color;
-
   // Whether to use the parent's width or only the minimum required by the equation
   final bool inheritWidth;
 
   // Function to be executed on error. Useful for Desktop platforms
   final Function onError;
 
+  // LaTeX commands to be executed right at the beginning of the document, after
+  // last `\usepackage` on Desktop platforms only. May be used to set font face.
+  final String desktopInitString;
+
   KaTeX(
       {Key key,
-      this.laTeX,
       this.delimiter = '\$',
       this.displayDelimiter = '\$\$',
-      this.color,
       this.background = Colors.white,
       this.inheritWidth = true,
       this.onError,
-      @required this.laTeXCode});
+      @required this.laTeXCode,
+      this.desktopInitString = '\\renewcommand\\familydefault{\\sfdefault}'});
 
   @override
   State<KaTeX> createState() {
     // As different platforms require different implementations we we created a function for choosing
     return chooseStateForPlatform();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('desktopInitString', desktopInitString));
   }
 }
 

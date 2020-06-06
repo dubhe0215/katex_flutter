@@ -44,7 +44,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
             '-colorspace',
             'sRGB',
             '-density',
-            '288',
+            '128',
             'katex.pdf',
             '-fuzz',
             '600',
@@ -65,6 +65,7 @@ class KaTeXStateDesktop extends State<KaTeX> {
     // Preparing LaTeX String
     String laTeX = widget.laTeXCode.data;
     laTeX = laTeX.replaceAll(RegExp('<\\s*[bB][rR](\\s|\\/)*>'), '\\\\*');
+    laTeX = laTeX.replaceAll('%', '\\%');
     // Determining the correct TMP path
     String path = Directory.systemTemp.path + '/katex_flutter/$platformId';
     // Creating sub folder
@@ -74,6 +75,9 @@ class KaTeXStateDesktop extends State<KaTeX> {
         await File(path + '/katex.tex').open(mode: FileMode.write);
     texFileAccess.writeStringSync('''
 \\documentclass[preview]{standalone}
+\\usepackage[utf8x]{inputenc}
+\\usepackage{libertine} % or \\usepackage{fourier} or \\usepackage[utopia]{mathdesign}
+${widget.desktopInitString}
 \\begin{document}
 $laTeX
 \\end{document}
