@@ -1,3 +1,8 @@
+## 4.0.0+24 - Moved to native Dart rendering instead of using JavaScipt
+
+ * Moved all internal calls to the CaTeX library instead of JavaScipt
+ * Increased rendering performance
+
 ## 3.3.0+23 - Stabilized Desktop support
 
  * Improved integration with `texlive` and `ImageMagick`

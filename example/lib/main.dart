@@ -27,9 +27,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController _laTeXInputController = TextEditingController(text: '''
-\$ G_{p,q}^{m,n} \\left(\\begin{matrix}a_1, \\ldots, a_n a_{n+1}, \\ldots, a_p b_1, \\ldots, b_m b_{m+1}, \\ldots, b_q
- \\end{matrix} \\bigg| z \\right). \$''');
+  TextEditingController _laTeXInputController = TextEditingController(
+      text: r'What do you think about $L' +
+          '\'' +
+          r' = {L}{\sqrt{1-\frac{v^2}{c^2}}}$ ?');
   String _laTeX;
 
   @override
