@@ -1,3 +1,8 @@
+## 4.0.1+25 - Improved rendering of inline LaTeX
+
+ * Moved from Wrap to RichText to provide better text rendering
+ * Removed deprecated JS compatibility
+
 ## 4.0.0+24 - Moved to native Dart rendering instead of using JavaScipt
 
  * Moved all internal calls to the CaTeX library instead of JavaScipt

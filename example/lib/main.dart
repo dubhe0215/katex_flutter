@@ -28,9 +28,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _laTeXInputController = TextEditingController(
-      text: r'What do you think about $L' +
-          '\'' +
-          r' = {L}{\sqrt{1-\frac{v^2}{c^2}}}$ ?');
+      text: r'What do you think about $L'
+          '\''
+          r' = {L}{\sqrt{1-\frac{v^2}{c^2}}}$ ?'
+          '\n'
+          r'And some display $\LaTeX$: $$\boxed{\rm{A function: } f(x) = \frac{5}{3} \cdot x}$$'
+          '\n'
+          r'$\KaTeX$-Flutter provides easy processing of $LaTeX$ embedded into any text.'
+          '\n'
+          r'This package was developped for testapp.schule education project. Find us on pub.dev/packages/katex_flutter !');
   String _laTeX;
 
   @override
@@ -64,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                     child: Builder(
-                        builder: (context) => KaTeX(
-                              laTeXCode: Text(_laTeX),
-                              background: Colors.grey[50],
-                              //onError: (e)=>print(e),
-                            )))
+                  builder: (context) => KaTeX(
+                    laTeXCode: Text(_laTeX,
+                        style: Theme.of(context).textTheme.bodyText2),
+                  ),
+                ))
               ],
             ),
           ),
