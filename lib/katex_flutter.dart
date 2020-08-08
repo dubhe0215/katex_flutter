@@ -39,7 +39,7 @@ class CaTeXState extends State<KaTeX> {
         widget.displayDelimiter.replaceAll(r'$', r'\$');
 
     final String rawRegExp =
-        '(($delimiter)([^$delimiter]+)($delimiter)|($displayDelimiter)([^$displayDelimiter]+)($displayDelimiter))';
+        '(($delimiter)([^$delimiter]*[^\\\\\\$delimiter])($delimiter)|($displayDelimiter)([^$displayDelimiter]*[^\\\\\\$displayDelimiter])($displayDelimiter))';
     List<RegExpMatch> matches =
         RegExp(rawRegExp, dotAll: true).allMatches(laTeXCode).toList();
 
