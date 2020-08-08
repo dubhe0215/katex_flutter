@@ -1,3 +1,7 @@
+## 4.0.2+26 - Fixed escape of delimiters
+
+ * You may now escape your specified delimiter by `\$delimiter`: Delimiter: $ `$x^2 + \$ \cdot $`
+
 ## 4.0.1+25 - Improved rendering of inline LaTeX
 
  * Moved from Wrap to RichText to provide better text rendering
