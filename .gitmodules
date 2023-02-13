@@ -1,0 +1,3 @@
+[submodule "CaTeX"]
+	path = CaTeX
+	url = https://github.com/dubhe0215/CaTeX.git
