@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:katex_flutter/katex_flutter.dart';
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({super.key});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -37,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
           r'$\KaTeX$-Flutter provides easy processing of $LaTeX$ embedded into any text.'
           '\n'
           r'This package was developped for testapp.schule education project. Find us on pub.dev/packages/katex_flutter !');
-  String _laTeX;
+  late String _laTeX;
 
   @override
   void initState() {

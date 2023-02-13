@@ -1,9 +1,7 @@
 library katex_flutter;
 
 import 'package:catex/catex.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// The basic WebView for displaying the created HTML String
 class KaTeX extends StatefulWidget {
@@ -17,8 +15,8 @@ class KaTeX extends StatefulWidget {
   final String displayDelimiter;
 
   KaTeX(
-      {Key key,
-      @required this.laTeXCode,
+      {super.key,
+      required this.laTeXCode,
       this.delimiter = r'$',
       this.displayDelimiter = r'$$'});
 
@@ -30,8 +28,8 @@ class CaTeXState extends State<KaTeX> {
   @override
   Widget build(BuildContext context) {
     // Fetching the Widget's LaTeX code as well as it's [TextStyle]
-    final String laTeXCode = widget.laTeXCode.data;
-    TextStyle defaultTextStyle = widget.laTeXCode.style;
+    final String laTeXCode = widget.laTeXCode.data!;
+    TextStyle? defaultTextStyle = widget.laTeXCode.style;
 
     // Building [RegExp] to find any Math part of the LaTeX code by looking for the specified delimiters
     final String delimiter = widget.delimiter.replaceAll(r'$', r'\$');
@@ -47,7 +45,7 @@ class CaTeXState extends State<KaTeX> {
     if (matches.isEmpty) return widget.laTeXCode;
 
     // Otherwise looping threw all matches and building a [RichText] from [TextSpan] and [WidgetSpan] widgets
-    List<InlineSpan> textBlocks = List();
+    List<InlineSpan> textBlocks = <InlineSpan>[];
     int lastTextEnd = 0;
 
     matches.forEach((laTeXMatch) {
@@ -59,14 +57,14 @@ class CaTeXState extends State<KaTeX> {
       if (laTeXMatch.group(3) != null)
         textBlocks.add(WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: CaTeX(laTeXMatch.group(3).trim())));
+            child: CaTeX(laTeXMatch.group(3)!.trim())));
       else
         textBlocks.addAll([
           TextSpan(text: '\n'),
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
             child: DefaultTextStyle.merge(
-                child: CaTeX(laTeXMatch.group(6).trim())),
+                child: CaTeX(laTeXMatch.group(6)!.trim())),
             /*style: Theme.of(context).textTheme.headline4.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: Theme.of(context).textTheme.bodyText1.fontSize * 2)*/
